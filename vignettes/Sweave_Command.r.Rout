@@ -1,0 +1,43 @@
+
+R version 2.6.0 (2007-10-03)
+Copyright (C) 2007 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> sweavePath <- file.path("C:","Documents and Settings","carnellr","My Documents",
++                         "R Packages","lhs","vignettes")
+>                         
+> Sweave(file.path(sweavePath, "augmentLHS_Example.Stex"),
++        syntax=SweaveSyntaxLatex,
++        output=file.path(sweavePath, "augmentLHS_Example.tex"))
+Writing to file C:/Documents and Settings/carnellr/My Documents/R Packages/lhs/vignettes/augmentLHS_Example.tex
+Processing code chunks ...
+ 1 : term verbatim
+Loading required package: lhs
+ 2 : echo term verbatim
+ 3 : term verbatim eps pdf
+ 4 : echo term verbatim
+ 5 : term verbatim eps pdf
+ 6 : echo term verbatim
+ 7 : term verbatim eps pdf
+ 8 : term verbatim eps pdf
+
+You can now run LaTeX on 'C:/Documents and Settings/carnellr/My Documents/R Packages/lhs/vignettes/augmentLHS_Example.tex'
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   0.82    0.00    0.87 
