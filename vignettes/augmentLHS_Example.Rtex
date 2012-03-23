@@ -10,8 +10,62 @@
 \begin{document}
 \maketitle
 
+% Comment required to put the vignette into the package index
+%\VignetteIndexEntry{An Example of Augmenting a Latin Hypercube}
+%\VignetteKeyword{lhs}
+%\VignetteKeyword{latin hypercube}
+
 % --------------------------- Functions ----------------------------------------
 
+\begin{Scode}{echo=FALSE}
+
+require(lhs)
+
+graph2DaugmentLHS1 <- function(sims, extras)
+{
+  A <- randomLHS(sims, 2)
+  B <- augmentLHS(A, extras)
+
+  plot.default(A[,1], A[,2], type="n", ylim=c(0,1),
+    xlim=c(0,1), xlab="x1", ylab="x2", xaxs="i", yaxs="i", main=""
+    )
+  for(i in 1:length(A[,1]))
+  {
+    rect(floor(A[i,1]*sims)/sims, floor(A[i,2]*sims)/sims,
+      ceiling(A[i,1]*sims)/sims, ceiling(A[i,2]*sims)/sims, col="grey")
+  }
+  points(A[,1], A[,2], pch=19, col="red")
+  abline(v=(0:sims)/sims, h=(0:sims)/sims)
+  
+  return(list(A=A,B=B,sims=sims,extras=extras))
+}
+
+graph2DaugmentLHS2 <- function(X)
+{
+  A <- X$A
+  B <- X$B
+  sims <- X$sims
+  extras <- X$extras
+
+  plot.default(A[,1], A[,2], type="n", ylim=c(0,1),
+    xlim=c(0,1), xlab="x1", ylab="x2", xaxs="i", yaxs="i", main=""
+    )
+  N <- sims + extras
+  for(i in 1:length(B[,1]))
+  {
+    rect(floor(B[i,1]*N)/N, floor(B[i,2]*N)/N,
+      ceiling(B[i,1]*N)/N, ceiling(B[i,2]*N)/N, col="grey")
+  }
+  points(A[,1], A[,2], pch=19, col="red")
+  points(B[((sims+1):(sims+extras)),1], B[((sims+1):(sims+extras)),2],
+    pch=19, col="blue")
+  abline(v=(0:N)/N, h=(0:N)/N)
+}
+
+#X <- graph2DaugmentLHS1(5,5)
+#graph2DaugmentLHS2(X)
+
+\end{Scode}
 
 % --------------------------- Text ------------------------------------------
 
@@ -28,11 +82,9 @@ for this situation can be created using the \texttt{lhs} package.\\
 
 First create a random Latin hypercube using the \texttt{randomLHS(n, k)}
 command:
-\begin{Schunk}
-\begin{Sinput}
-> A <- randomLHS(5, 2)
-\end{Sinput}
-\end{Schunk}
+\begin{Scode}
+  A <- randomLHS(5,2)
+\end{Scode}
 An example of this hypercube is shown in Figure \ref{fig:original5}.  Note that
 the $Latin$ property of the hypercube requires that each of the 5 equal
 probability intervals be filled (i.e. each row and each column is filled with
@@ -42,7 +94,10 @@ variable.\\
 
 \begin{figure}[p]
   \begin{center}
-\includegraphics{augmentLHS_Example-003}
+  \begin{Scode}{fig=TRUE,echo=FALSE}
+    set.seed(10)
+    X <- graph2DaugmentLHS1(5, 5)
+  \end{Scode}
   \caption{A randomly produced Latin Hypercube with uniform marginal
            distributions for 2 parameters with 5 simulations.}
 	\label{fig:original5}
@@ -52,11 +107,9 @@ variable.\\
 Next, in order to augment the design with more points use
 \texttt{augmentLHS(lhs, m)}.  The following will add 5 more points to the
 design:
-\begin{Schunk}
-\begin{Sinput}
-> B <- augmentLHS(A, 5)
-\end{Sinput}
-\end{Schunk}
+\begin{Scode}
+B <- augmentLHS(A, 5)
+\end{Scode}
 The \texttt{augmentLHS} function works by re-dividing the original design into
 $n+m$ intervals (e.g. 5+5=10) keeping the original design points exactly in the
 same position.  It then randomly fills the empty row-column sets.  The results
@@ -64,7 +117,9 @@ are shown in Figure \ref{fig:augmented10}.\\
 
 \begin{figure}[p]
   \begin{center}
-\includegraphics{augmentLHS_Example-005}
+  \begin{Scode}{fig=TRUE,echo=FALSE}
+    graph2DaugmentLHS2(X)
+  \end{Scode}
   \caption{A randomly produced Latin Hypercube of 5 points (red) with 5
            augmented points (blue).  Each parameter has a uniform marginal
            distribution.}
@@ -100,24 +155,27 @@ points are equal to the number of original points, then a strictly uniform
 Latin hypercube is guaranteed.  An example of an augmented design which is not
 uniform in the marginal distributions is given in Figure \ref{fig:badAugment}.
 The commands were:
-\begin{Schunk}
-\begin{Sinput}
-> A <- randomLHS(7, 2)
-> B <- augmentLHS(A, 3)
-\end{Sinput}
-\end{Schunk}
+\begin{Scode}
+A <- randomLHS(7, 2)
+B <- augmentLHS(A, 3)
+\end{Scode}\\
 
 \begin{figure}[p]
   \centering
   \subfigure[Original design with 7 points.]{
     \label{fig:badAugment:a} %% label for first subfigure
-\includegraphics{augmentLHS_Example-007}
+    \begin{Scode}{fig=TRUE,echo=FALSE}
+      set.seed(12)
+      X <- graph2DaugmentLHS1(7, 3)
+    \end{Scode}
   }
   \hspace{0.5in}
   \subfigure[Augmented design with 3 additional points.  Note that row 9 has 2
              points and row 3 has none.]{
     \label{fig:badAugment:b} %% label for second subfigure
-\includegraphics{augmentLHS_Example-008}
+    \begin{Scode}{fig=TRUE,echo=FALSE}
+      graph2DaugmentLHS2(X)
+    \end{Scode}
   }
   \caption{Augmented Latin hypercube design with a non-uniform marginal
            distribution.}
