@@ -10,6 +10,11 @@
 \begin{document}
 \maketitle
 
+% Comment required to put the vignette into the package index
+%\VignetteIndexEntry{An Example of Augmenting a Latin Hypercube}
+%\VignetteKeyword{lhs}
+%\VignetteKeyword{latin hypercube}
+
 % --------------------------- Functions ----------------------------------------
 
 \begin{Scode}{echo=FALSE}
