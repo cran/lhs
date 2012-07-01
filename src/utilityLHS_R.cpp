@@ -1,21 +1,28 @@
-#include <cmath>
-/* VISUAL_STUDIO is defined as a preprocessor directive in the build */
-#ifndef VISUAL_STUDIO
-#include <R.h>
-#else
-#include <stdio.h>
-#endif
+/*
+ *
+ * utilityLHS_R.cpp: A C++ routine of utilities used in the LHS package
+ * Copyright (C) 2012  Robert Carnell
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
 
-#ifndef VISUAL_STUDIO
-#define PRINT_MACRO Rprintf
-#define ERROR_MACRO error
-#else
-#define PRINT_MACRO printf
-#define ERROR_MACRO printf
-#endif
+#include "defines.h"
+#include "utilityLHS_R.h"
 
-
-extern "C" int lhsCheck(int * N, int * K, int * result, int bTranspose)
+int utilityLHS::lhsCheck(int N, int K, int * result, int bTranspose)
 {
 	int total = 0;
 	/*
@@ -29,109 +36,74 @@ extern "C" int lhsCheck(int * N, int * K, int * result, int bTranspose)
 	*/
 	if (bTranspose == 0)
 	{
-		for (int row = 0; row < *K; row++)
+		for (int row = 0; row < K; row++)
 		{
 			total = 0;
-			for (int col = 0; col < *N; col++)
+			for (int col = 0; col < N; col++)
 			{
-				total += result[row * (*N) + col];
+				total += result[row * N + col];
 			}
-			if (total != (*N) * ((*N) + 1) / 2) return 0;
+			if (total != N * (N + 1) / 2) return 0;
 		}
 	}
 	else
 	{
-		for (int col = 0; col < *K; col++)
+		for (int col = 0; col < K; col++)
 		{
 			total = 0;
-			for (int row = 0; row < *N; row++)
+			for (int row = 0; row < N; row++)
 			{
-				total += result[row * (*K) + col];
+				total += result[row * K + col];
 			}
-			if (total != (*N) * ((*N) + 1) / 2) return 0;
+			if (total != N * (N + 1) / 2) return 0;
 		}
 	}
 	return 1;
 }
 
-extern "C" void lhsPrint(int * N, int * K, int * result, int bTranspose)
+void utilityLHS::rank(std::vector<double> & toRank, std::vector<int> & ranks)
 {
-	if (bTranspose == 0)
+	size_t len = toRank.size();
+#ifdef _DEBUG
+	if (toRank.size() != ranks.size())
+		throw new std::exception("illegal call in rank");
+#endif
+	for (size_t i = 0; i < len; i++)
 	{
-		for (int row = 0; row < *K; row++)
+		ranks[i] = 0;
+		for (size_t j = 0; j < len; j++)
 		{
-			for (int col = 0; col < *N; col++)
-			{
-				PRINT_MACRO("%d ", result[row * (*N) + col]);
-			}
-			PRINT_MACRO("\n");
-		}
-	}
-	else
-	{
-		for (int row = 0; row < *N; row++)
-		{
-			for (int col = 0; col < *K; col++)
-			{
-				PRINT_MACRO("%d ", result[row * (*K) + col]);
-			}
-			PRINT_MACRO("\n");
+			if (toRank[i] < toRank[j])
+				ranks[i]++;
 		}
 	}
 }
 
-extern "C" void lhsPrint_double(int * N, int * K, double * result)
+void utilityLHS::rankColumns(std::vector<double> & toRank, std::vector<int> & ranks, int nrow)
 {
-	// always bTranspose == 1
-	for (int row = 0; row < *N; row++)
+	size_t n = static_cast<size_t>(nrow);
+	std::vector<double> column = std::vector<double>(n);
+	size_t len = toRank.size();
+	int offset;
+#ifdef _DEBUG
+	if (toRank.size() != ranks.size())
+		throw new std::exception("illegal call in rank");
+#endif
+	for (size_t i = 0; i < len; i+=n)
 	{
-		for (int col = 0; col < *K; col++)
+		// copy the first nrow
+		for (size_t j = 0; j < n; j++)
 		{
-			PRINT_MACRO("%g ", result[row * (*K) + col]);
+			column[j] = toRank[i+j];
 		}
-		PRINT_MACRO("\n");
-	}
-}
-
-/*
- * Function to return the sum of the inverse of the distances between each
- * point in the matrix
- *
- * Can't have a template in C, so use the template in c++ and expose the functions using extern "C"
- */
-template <class T>
-double sumInvDistance(T * matrix, int* nr, int* nc) 
-{ 
-	T oneDistance = (T) 0;
-	double totalInvDistance = 0.0;
-	/* iterate the row of the first point from 0 to N-2 */
-	for (int i = 0; i < (*nr - 1); i++)
-	{
-		/* iterate the row the second point from i+1 to N-1 */
-		for (int j = (i + 1); j < *nr; j++)
+		// sort
+		std::sort(column.begin(), column.end(), std::less<double>());
+		// find the sorted number that is the same as the number to rank
+		for (size_t j = 0; j < n; j++)
 		{
-			oneDistance = 0;
-			/* iterate through the columns, summing the squared differences */
-			for (int k = 0; k < *nc; k++)
-			{
-				/* calculate the square of the difference in one dimension between the
-				* points */
-				oneDistance += (matrix[i * (*nc) + k] - matrix[j * (*nc) + k]) * (matrix[i * (*nc) + k] - matrix[j * (*nc) + k]);
-			}
-			/* sum the inverse distances */
-			totalInvDistance += (1.0 / sqrt((double) oneDistance));
+			offset = static_cast<int>(i);
+			ranks[i+j] = std::find(toRank.begin()+offset, toRank.begin()+offset+nrow, column[j]) - (toRank.begin()+offset);
 		}
 	}
-	return(totalInvDistance);
-}
-
-extern "C" double sumInvDistance_double(double * matrix, int * nr, int * nc)
-{
-	return sumInvDistance(matrix, nr, nc);
-}
-
-extern "C" double sumInvDistance_int(int * matrix, int * nr, int * nc)
-{
-	return sumInvDistance(matrix, nr, nc);
 }
 
