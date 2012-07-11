@@ -1,11 +1,46 @@
-#include <math.h>
-#include <Rmath.h>
+/*
+ *
+ * defines.h: A C++ header used in the LHS package
+ * Copyright (C) 2012  Robert Carnell
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#pragma once
+
+#include <cstdlib>
+#include <cmath>
+#include <exception>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <cfloat>
+#include <climits>
 /* VISUAL_STUDIO is defined as a preprocessor directive in the build */
 #ifndef VISUAL_STUDIO
-#include <R.h>
+#include "R.h"
+#include "Rmath.h"
 #else
-#include <stdio.h>
+#include <cstdio>
+#ifndef MATHLIB_STANDALONE
+#define MATHLIB_STANDALONE
+#include "Rmath.h"
 #endif
+#endif
+#include "simpleMatrix.h"
 
 #define PRINT_RESULT 0
 
@@ -17,9 +52,13 @@
 #define ERROR_MACRO printf
 #endif
 
-int lhsCheck(int * N, int * K, int * result, int bTranspose);
-void lhsPrint(int * N, int * K, int * result, int bTranspose);
-void lhsPrint_double(int * N, int * K, double * result);
-double sumInvDistance_double(double * matrix, int * nr, int * nc);
-double sumInvDistance_int(int * matrix, int * nr, int * nc);
+/* include after PRINT_MACRO is defined */
+#include "utilityLHS_R.h"
+
+extern "C" {
+	void improvedLHS_C(int* N, int* K, int* DUP, int* result);
+	void maximinLHS_C(int* N, int* K, int* DUP, int* result);
+	void optimumLHS_C(int* N, int* K, int* MAXSWEEPS, double* EPS, int* pOld, int* JLen, int* bVerbose);
+	void optSeededLHS_C(int* N, int* K, int* MAXSWEEPS, double* EPS, double* pOld, int* JLen, int* bVerbose);
+}
 
