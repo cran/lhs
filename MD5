@@ -1,5 +1,5 @@
-b699264efad2ee328745c4a6039c605b *ChangeLog
-3a4a4883ba6fdb0334c64f85627aca08 *DESCRIPTION
+4aad80adbd1841f2d9adb01ad3eca590 *ChangeLog
+f5d6e0e2019b18ee7c4c49c9e63210eb *DESCRIPTION
 306c6ce24c902673bd0d74b7ef74130a *NAMESPACE
 60a1821cf0e178fe9da3b7cd0cabc332 *R/augmentLHS.R
 70b7891e0e54d1afc655ef30785294aa *R/geneticLHS.R
@@ -11,7 +11,7 @@ bf01931e2d447da961544bd667c06c48 *R/optAugmentLHS.R
 c0b4bd27ae5771fd74f8ffedb1a1ce2a *R/randomLHS.r
 1827548f7dd29f6eea192097719311e1 *R/runifint.r
 c62d438d9d8e479af8541bbf6b6cad13 *inst/doc/augmentLHS_Example.Rtex
-02e3969bd7d07afe094fe7e89f251aef *inst/doc/augmentLHS_Example.pdf
+d74096381d97cbdca2853260a54e7c59 *inst/doc/augmentLHS_Example.pdf
 bf9e1aa5d1da45cdcb3b8cefe0d567d6 *man/augmentLHS.Rd
 d001b5c27c704c573ea59a2f27452e1a *man/geneticLHS.Rd
 6d00dfb44335d1deed01473e13ad3465 *man/improvedLHS.Rd
@@ -22,12 +22,12 @@ e69533940acd0fb854248d7519db6180 *man/lhs-internal.Rd
 921de5038e7b99803389af443f1fb331 *man/optSeededLHS.Rd
 a1d59435279af17bb744f313cfd93778 *man/optimumLHS.Rd
 ab0e26f96c6ba3e0e2493a9ef76be3d7 *man/randomLHS.Rd
-b21c78e3fdeca0097f0b1a48b63a7528 *src/defines.h
-bce1e7b0e5b163449c879e5dd5489640 *src/improvedLHS_R.cpp
-43115af9c1c87777c822b34fcbd09312 *src/maximinLHS_R.cpp
-dc8d2b418b8d681015d737c578973df3 *src/optSeededLHS_R.cpp
-7800c62e09942beb74a33eb27de6b084 *src/optimumLHS_R.cpp
-a169984bd357890eb571aa4f94350139 *src/simpleMatrix.h
+b06b70be6ce252121955d004c4dd4e5b *src/defines.h
+8606b25ca7497b9020c965472a7587ab *src/improvedLHS_R.cpp
+c1d06b3029822f6aba388ffc63c584ae *src/maximinLHS_R.cpp
+4adcbce55b034267fa156a8e58a79d6b *src/optSeededLHS_R.cpp
+d7efc3fd518977718190b57a50626658 *src/optimumLHS_R.cpp
+9e7265538f6919bc1cb688b2b5e31445 *src/simpleMatrix.h
 d7655241cb7ae08089d6b5a56ba7fa3a *src/utilityLHS_R.cpp
-c0626746d63a5820de69b4d58e5353d7 *src/utilityLHS_R.h
+84b4bf8f980adc9f0f5df8716f395697 *src/utilityLHS_R.h
 c62d438d9d8e479af8541bbf6b6cad13 *vignettes/augmentLHS_Example.Rtex
