@@ -1,7 +1,7 @@
-e7d1f8b5cda1cc15f15d872affe7ce1a *ChangeLog
-3e40aba45fd6b803a719f73f32a76ff3 *DESCRIPTION
+fc1e3999033f0552f3a9c5dffffa63ce *ChangeLog
+39342ae7e43df71cebf8b7ed5cdf637a *DESCRIPTION
 49b9628e9f383098e1758805daf5f40e *NAMESPACE
-60a1821cf0e178fe9da3b7cd0cabc332 *R/augmentLHS.R
+8fe4c844ce4c5640d48c90a0708fba96 *R/augmentLHS.R
 f10c1c4def0a680956843e50bf90a8dd *R/geneticLHS.R
 6d0df3bec427a1741073f6047a75a698 *R/improvedLHS.r
 6188e4c91d562f4b35f34c612d020f00 *R/maximinLHS.R
@@ -14,7 +14,7 @@ b919e5c316b810f1a6aa3e357a5e6127 *build/vignette.rds
 027456f4e65b84661e1f56f310850c6a *inst/doc/augmentLHS_Example.R
 c62d438d9d8e479af8541bbf6b6cad13 *inst/doc/augmentLHS_Example.Rtex
 d74096381d97cbdca2853260a54e7c59 *inst/doc/augmentLHS_Example.pdf
-fdae3f07f0ede65982039dbf60e29c27 *inst/unitTests/runit_augmentLHS.r
+32d6e970d691cb524fbddce97962f111 *inst/unitTests/runit_augmentLHS.r
 3bb0d524572432ba467990376eaa0558 *inst/unitTests/runit_geneticLHS.r
 1082c1a44014bd449f0d76fc277b919c *inst/unitTests/runit_improvedLHS.r
 d40aa7457e7523852c501e2a26054f02 *inst/unitTests/runit_maximinLHS.r
