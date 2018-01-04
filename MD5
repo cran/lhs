@@ -1,5 +1,5 @@
-0370d6b803526930172c0214c2a37ebb *ChangeLog
-ae4be4ab004c2da232adacff1f6b8e4d *DESCRIPTION
+6b04df49f5cff020e0ae163f4d1663c9 *ChangeLog
+5a34af38e150064edb7fdbc453983cb7 *DESCRIPTION
 2cee6be750ec0b92a914e7945bd9235a *NAMESPACE
 8fe4c844ce4c5640d48c90a0708fba96 *R/augmentLHS.R
 f10c1c4def0a680956843e50bf90a8dd *R/geneticLHS.R
@@ -13,7 +13,7 @@ c0b4bd27ae5771fd74f8ffedb1a1ce2a *R/randomLHS.r
 76db89e5794518e336e586d40c91ea22 *build/vignette.rds
 48d1be736f6d6ffbbb04c96cb6d700a2 *inst/doc/augmentLHS_Example.R
 c62d438d9d8e479af8541bbf6b6cad13 *inst/doc/augmentLHS_Example.Rtex
-3bc8cdefcf64d54da6e893d007a0f3a4 *inst/doc/augmentLHS_Example.pdf
+87a50946f7aa89a8d485dede8550f46a *inst/doc/augmentLHS_Example.pdf
 474ce10d354a69254484d0596ffa32aa *inst/unitTests/runit_augmentLHS.r
 b9dc17b579523677be065baead42d47f *inst/unitTests/runit_geneticLHS.r
 cad5bca30e4271d053eb2de93d5f52d4 *inst/unitTests/runit_improvedLHS.r
@@ -41,5 +41,5 @@ d7efc3fd518977718190b57a50626658 *src/optimumLHS_R.cpp
 9e7265538f6919bc1cb688b2b5e31445 *src/simpleMatrix.h
 d7655241cb7ae08089d6b5a56ba7fa3a *src/utilityLHS_R.cpp
 84b4bf8f980adc9f0f5df8716f395697 *src/utilityLHS_R.h
-0623d0fe09df5fbb9c23e1c427383921 *tests/runTests.R
+50a0b67871c70cd14b2002eebde31fd5 *tests/runTests.R
 c62d438d9d8e479af8541bbf6b6cad13 *vignettes/augmentLHS_Example.Rtex
