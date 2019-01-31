@@ -1,18 +1,26 @@
 Package: lhs
-Version: 0.16
-Date: 2017-12-23
 Title: Latin Hypercube Samples
-Authors@R: c(person("Rob", "Carnell", role=c("aut","cre"),
-  email="bertcarnell@gmail.com"))
+Version: 1.0
+Authors@R: 
+    person(given = "Rob",
+           family = "Carnell",
+           role = c("aut", "cre"),
+           email = "bertcarnell@gmail.com")
+Description: Provides a number of methods for creating and augmenting Latin Hypercube Samples.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.4.0)
+LinkingTo: Rcpp
+Imports: Rcpp
+Suggests: testthat, DoE.base, knitr, rmarkdown, covr
+URL: https://github.com/bertcarnell/lhs
+BugReports: https://github.com/bertcarnell/lhs/issues
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
+NeedsCompilation: yes
+Packaged: 2019-01-29 01:16:18 UTC; bertc
 Author: Rob Carnell [aut, cre]
 Maintainer: Rob Carnell <bertcarnell@gmail.com>
-Depends: R (>= 3.3.0)
-Suggests: RUnit
-Description: Provides a number of methods for creating and augmenting Latin Hypercube Samples.
-License: GPL (>= 2)
-URL: http://lhs.r-forge.r-project.org
-BugReports: http://r-forge.r-project.org/projects/lhs/
-NeedsCompilation: yes
-Packaged: 2017-12-23 23:28:14 UTC; carnellr
 Repository: CRAN
-Date/Publication: 2018-01-04 16:54:37 UTC
+Date/Publication: 2019-01-31 11:30:03 UTC

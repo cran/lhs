@@ -1,92 +1,59 @@
-################################################################################
-#
-# Function: optSeededLHS.R
-# Purpose:  To create a nearly optimal latin hypercube design with respect to
-#           the S optimality criterion using the Columnwise-pairwise (CP)
-#           Algorithm using input seed design
-# Author:   Rob Carnell
-# Created:  26 May 05
-#
-# Variables:
-#   seed is the input Seed design.  The input seed must have the correct number
-#      of variables and must be on the interval [0,1]
-#   m is the number of addtional points to augment the design with
-#      (default=1, must be a positive integer)
-#   maxSweeps is the maximum number of times the CP algorithm is applied to all
-#     the columns.
-#   eps is the optimal stopping criterion (explained later)
-#
-# Reference:
-#   This code was motivated by the work of Rafal Stocki
-#   "A method to improve design reliability using optimal Latin hypercube
-#    sampling" Institute of Fundamental Technological Research, Polish
-#    Academy of Sciences, ul. Swietokrzyska 21, 00-049 Warsaw, Poland
-#
-# Required functions: ranperm.R, augmentlhd.R
-#
-# Explanation:
-#  S optimality seeks to maximize the inverse of the sum of the distances
-#  from each point in the design to all other points
-# Algorithm:  generate a random latin hypercube design by augmenting the seed
-#  design.
-#  within each column of that matrix, interchange two numbers.
-#  At each step, calculate the inverse of the sum of the distances between all
-#  points, and pick modification which minimizes the distances.
-#  Continue to move from column to column until the stopping criterion is
-#  reached.  Either the maximum number of sweeps through the matrix is reached,
-#  or the interchanges in a given row have no benefit to the S optimality, or
-#  the decrease in the inverse of the sum of the distances is small compared to
-#  the first decrease due to the interchange in the first column (ratio set by
-#  eps)
-#
-# Run Time and computer resources:  Stocki asserts that processing time
-#   increases proportional to k^5 for constant n and n^5 for constant k
-#
-# The dist function calculates the distance between each row of a matrix
-#   and places the answer in a k*k half diagonal matrix
-#
-# 6/30/2012
-#   Changed the C function call.  Added the verbose argument.
-#
-################################################################################
+# Copyright 2019 Robert Carnell
 
-optSeededLHS <- function(seed, m=1, maxSweeps=2, eps=.1, verbose=FALSE)
+#' Optimum Seeded Latin Hypercube Sample
+#'
+#' Augments an existing Latin Hypercube Sample, adding points to the design, while
+#' maintaining the \emph{latin} properties of the design.  This function then uses the
+#' columnwise pairwise (\acronym{CP}) algoritm to optimize the design.  The original design is not necessarily maintained.
+#'
+#' @details
+#' Augments an existing Latin Hypercube Sample, adding points to the design, while
+#' maintaining the \emph{latin} properties of the design.  This function then uses the
+#' \acronym{CP} algoritm to optimize the design.  The original design
+#' is not necessarily maintained.
+#'
+#' @param seed The number of partitions (simulations or design points)
+#' @param m The number of additional points to add to the seed matrix \code{seed}.  default value is zero.  If m is zero then the seed design is optimized.
+#' @param maxSweeps The maximum number of times the CP algorithm is applied to all the columns.
+#' @param eps The optimal stopping criterion
+#' @param verbose Print informational messages
+#'
+#' @return An \code{n} by \code{k} Latin Hypercube Sample matrix with values uniformly distributed on [0,1]
+#' @export
+#' @seealso   [randomLHS()], [geneticLHS()], [improvedLHS()], [maximinLHS()], and
+#' [optimumLHS()] to generate Latin Hypercube Samples.  [optAugmentLHS()] and
+#' [augmentLHS()] to modify and augment existing designs.
+#' @keywords design
+#'
+#' @references
+#'   Stein, M.  (1987) Large Sample Properties of Simulations Using Latin Hypercube Sampling.
+#'   \emph{Technometrics}. \bold{29}, 143--151.
+#'
+#' @examples
+#'   a <- randomLHS(4,3)
+#'   a
+#'   optSeededLHS(a, 2, 2, .1)
+optSeededLHS <- function(seed, m=0, maxSweeps=2, eps=.1, verbose=FALSE)
 {
-  if(is.matrix(seed)==FALSE)
-    stop("Input seed Design must be in the Matrix class\n")
-  if(length(m)!=1 | length(maxSweeps)!=1 |length(eps)!=1)
-    stop("m, eps, and maxSweeps may not be vectors")
-  if(any(is.na(c(m,maxSweeps,eps))))
-    stop("m, eps, and maxSweeps may not be NA or NaN")
-  if(any(is.infinite(c(m,eps,maxSweeps))))
-    stop("m, eps, and maxSweeps may not be infinite")
-  if(eps>=1 | eps<=0) stop("eps must fall in the interval (0,1)\n")
-  if(floor(maxSweeps)!=maxSweeps | maxSweeps<1)
-    stop("maxSweeps must be a positive integer\n")
-  if(floor(m)!=m | m<1) stop("m must be a positive integer\n")
-  if(try(is.function(augmentLHS), silent=TRUE)!=TRUE)
-    stop("The augmentLHS.R function must be sourced\n")
-  if(any(is.na(seed)==TRUE))
-    stop("Input Design cannot contain any NA entries\n")
-  if(max(seed)>1 | min(seed)<0)
-    stop("The seed design must be uniformly distributed on [0,1]\n")
-
   k <- ncol(seed)
-  N <- m + nrow(seed)
+  if (!is.numeric(m) || is.na(m) || !is.finite(m) || m < 0)
+    stop("m must be a positive number")
 
-  Pold <- augmentLHS(seed, m)
-  
-  if(m==1) return(Pold)
+  if (m == 0)
+  {
+    N <- nrow(seed)
+    Pold <- seed
+  }
+  else
+  {
+    N <- m + nrow(seed)
 
-  Pold <- c(t(Pold)) # changes to an N*k length vector
+    Pold <- augmentLHS(seed, m)
+  }
 
-  jLen <- choose(N, 2) + 1
+  result <- .Call("optSeededLHS_cpp", as.integer(N), as.integer(k),
+                  as.integer(maxSweeps), eps, Pold, as.logical(verbose),
+                  PACKAGE = "lhs")
 
-  resultList <- .C(C_optSeededLHS_C, as.integer(N), as.integer(k),
-                     as.integer(maxSweeps), as.double(eps), as.double(Pold),
-                     as.integer(jLen), as.integer(verbose))
-
-  result <- resultList[[5]]
-
-  return(matrix(result, nrow=N, ncol=k, byrow=TRUE))
+  return(result)
 }

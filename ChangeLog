@@ -58,3 +58,9 @@ Version 0.15
 Version 0.16
   Removed the file output of test files which were causing errors on CRAN.
   changed the version dependency to >= 3.3.0.  (>=3.4.0 caused errors on CRAN)
+
+Verion 1.0
+  Major revision.
+  Changed all underlying C code to C++ using Rcpp.
+  Added orthogonal array latin hypercube capability
+  
