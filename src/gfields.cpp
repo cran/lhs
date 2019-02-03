@@ -52,7 +52,7 @@ namespace oacpp
 
         if (GF_fields_are_set)
         {
-            PRINT_OUTPUT("Warning: Fields being re-initialized.  Possible memory waste.\n"); // LCOV_EXCL_LINE
+            PRINT_OUTPUT << "Warning: Fields being re-initialized.  Possible memory waste.\n"; // LCOV_EXCL_LINE
         }
 
         // set variables
@@ -77,19 +77,22 @@ namespace oacpp
         if (q < 1)
         { /* Impossible argument */
             msg << "Field must have positive number of elements.\n";
-            throw std::runtime_error(msg.str().c_str());
+			const std::string smsg = msg.str();
+			throw std::runtime_error(smsg.c_str());
         }
         if (q == 1)
         { /* Pointless  argument */
             msg << "Field with 1 element was requested. \n";
-            throw std::runtime_error(msg.str().c_str());
+			const std::string smsg = msg.str();
+			throw std::runtime_error(smsg.c_str());
         }
 
         primes::primepow(q, &p, &n, &ispp);
         if (!ispp)
         {
             msg << "q=" << q << " is not a prime power.\n";
-            throw std::runtime_error(msg.str().c_str());
+			const std::string smsg = msg.str();
+			throw std::runtime_error(smsg.c_str());
         }
 
         // include generated code
@@ -109,14 +112,16 @@ namespace oacpp
             else // LCOV_EXCL_START
             {
                 msg << "Construction failed for GF(" << q << ").\n";
-                throw std::runtime_error(msg.str().c_str());
+				const std::string smsg = msg.str();
+				throw std::runtime_error(smsg.c_str());
             } // LCOV_EXCL_STOP
         }
         else
         {
             msg << "GF(" << q << ") = GF(" << p << "^" << n << ") is not\n";
             msg << "included in this program. To add it, consider modifying gfields.c.\n";
-            throw std::runtime_error(msg.str().c_str());
+			const std::string smsg = msg.str();
+			throw std::runtime_error(smsg.c_str());
         }
         return SUCCESS_CHECK;
     }
