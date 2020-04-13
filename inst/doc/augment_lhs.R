@@ -1,4 +1,4 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -48,27 +48,27 @@ graph2DaugmentLHS2 <- function(X)
 # X <- graph2DaugmentLHS1(5,5)
 # graph2DaugmentLHS2(X)
 
-## ----randomlhs-----------------------------------------------------------
+## ----randomlhs----------------------------------------------------------------
 A <- randomLHS(5,2)
 
-## ----original5, echo=FALSE, fig.align='center', fig.height=5, fig.width=5----
+## ----original5, echo=FALSE, fig.align='center', fig.height=5, fig.width=5-----
 set.seed(10)
 X <- graph2DaugmentLHS1(5, 5)
 
-## ----augment5------------------------------------------------------------
+## ----augment5-----------------------------------------------------------------
 B <- augmentLHS(A, 5)
 
 ## ----augmented10, fig.align='center', echo=FALSE, fig.height=5, fig.width=5----
 graph2DaugmentLHS2(X)
 
-## ----random_and_augment--------------------------------------------------
+## ----random_and_augment-------------------------------------------------------
 A <- randomLHS(7, 2)
 B <- augmentLHS(A, 3)
 
-## ----Z, echo=FALSE, fig.align='center', fig.height=5, fig.width=5--------
+## ----Z, echo=FALSE, fig.align='center', fig.height=5, fig.width=5-------------
 set.seed(12)
 X <- graph2DaugmentLHS1(7, 3)
 
-## ----W, echo=FALSE, fig.align='center', fig.height=5, fig.width=5--------
+## ----W, echo=FALSE, fig.align='center', fig.height=5, fig.width=5-------------
 graph2DaugmentLHS2(X)
 

@@ -1,4 +1,4 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -107,17 +107,17 @@ graph2dLHSTransform <- function(Alhs, transform1, transform2, min1, max1, min2, 
 #graph2dLHSTransform(B[,1:2], f)
 
 
-## ----block1--------------------------------------------------------------
+## ----block1-------------------------------------------------------------------
 # set the seed for reproducibility
 set.seed(1111)
 # a design with 5 samples from 4 parameters
 A <- randomLHS(5, 4) 
 A
 
-## ----figureX, fig.align='center', fig.height=5, fig.width=5, echo=FALSE----
+## ----figureX, fig.align='center', fig.height=5, fig.width=5, echo=FALSE-------
 graph2dLHS(A[,1:2])
 
-## ----block 3-------------------------------------------------------------
+## ----block 3------------------------------------------------------------------
 B <- matrix(nrow = nrow(A), ncol = ncol(A))
 B[,1] <- qnorm(A[,1], mean = 0, sd = 1)
 B[,2] <- qlnorm(A[,2], meanlog = 0.5, sdlog = 1)
@@ -125,12 +125,12 @@ B[,3] <- A[,3]
 B[,4] <- qunif(A[,4], min = 7, max = 10)
 B
 
-## ----figureY, fig.align='center', fig.height=5, fig.width=5, echo=FALSE----
+## ----figureY, fig.align='center', fig.height=5, fig.width=5, echo=FALSE-------
 f <- function(x){qnorm(x)}
 g <- function(x){qlnorm(x, meanlog = 0.5, sdlog = 1)}
 graph2dLHSTransform(B[,1:2], f, g, -4, 4, 0, 8)
 
-## ----block 4-------------------------------------------------------------
+## ----block 4------------------------------------------------------------------
 set.seed(101)
 A <- randomLHS(30, 10)
 A1 <- optimumLHS(30, 10, maxSweeps = 4, eps = 0.01)
@@ -139,12 +139,12 @@ A3 <- improvedLHS(30, 10, dup = 5)
 A4 <- geneticLHS(30, 10, pop = 1000, gen = 8, pMut = 0.1, criterium = "S")
 A5 <- geneticLHS(30, 10, pop = 1000, gen = 8, pMut = 0.1, criterium = "Maximin")
 
-## ----Z, fig.align='center', fig.height=7, fig.width=7, echo=FALSE--------
+## ----Z, fig.align='center', fig.height=7, fig.width=7, echo=FALSE-------------
 pairs(A, pch = 19, col = "blue", cex = 0.5)
 
-## ----W, fig.align='center', fig.height=7, fig.width=7, echo=FALSE--------
+## ----W, fig.align='center', fig.height=7, fig.width=7, echo=FALSE-------------
 pairs(A1, pch = 19, col = "blue", cex = 0.5)
 
-## ----G, fig.align='center', fig.height=7, fig.width=7, echo=FALSE--------
+## ----G, fig.align='center', fig.height=7, fig.width=7, echo=FALSE-------------
 pairs(A2, pch = 19, col = "blue", cex = 0.5)
 
