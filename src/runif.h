@@ -52,6 +52,10 @@ namespace oacpp
 	*/
     struct SeedSet
     {
+        /** Default Constructor */
+        SeedSet() {};
+        /** Constructor */
+        SeedSet(int one, int two, int three, int four) { is = one; js = two; ks = three; ls = four; };
 		/** seed i */
         int is;
 		/** seed j */
@@ -78,8 +82,6 @@ namespace oacpp
         RUnif();
 		/** Constructor with individual seeds */
         RUnif(int is, int js, int ks, int ls);
-		/** Constructor with a seed set */
-        RUnif(SeedSet seedSet);
         
         ~RUnif() {};
         
@@ -96,7 +98,7 @@ namespace oacpp
          * Set the seeds to equal the numbers in the seedSet
          * @param seedSet a set of four seeds
          */
-        void seed(SeedSet seedSet);
+        void seed(SeedSet & seedSet);
         
 		/**
 		 * Get the seed set
@@ -138,7 +140,7 @@ namespace oacpp
 		void ranums(std::vector<double> & x, int n);
 
 		int m_jent, m_i, m_j, m_k, m_l, ip, jp;
-		double u[SEED_VECTOR_LENGTH];
+        std::vector<double> u;
 		double c, cd, cm;
 	};
 }
