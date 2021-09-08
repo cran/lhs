@@ -1,5 +1,5 @@
-3974924d50dfb5a3b52272d2186ddfd2 *ChangeLog
-6093c2748fe852c4de45c55cf558623f *DESCRIPTION
+eb4d9f871c8c7ba52610b4476bf68305 *ChangeLog
+db642d31bccbc7a07ef13703506aee5d *DESCRIPTION
 4ad42b6ea879a1ef4e8ca522e4ada103 *NAMESPACE
 53866b3921acf88d621f1b67d6bf5517 *R/augmentLHS.R
 851e4e4b32ef0d1ff208e28d2469abfe *R/createOA.R
@@ -19,13 +19,13 @@ b6508e5d04a13558e19c6534c768e2a9 *R/optimumLHS.R
 bd8aa815de477b25d5e28b3b329adaf2 *build/vignette.rds
 c40fe474107a72a524c98cd5d077c125 *inst/doc/augment_lhs.R
 2ea4584a4f8f5710e9e845e365d054ea *inst/doc/augment_lhs.Rmd
-2a40fd461da9f86782bdc2a6681da30c *inst/doc/augment_lhs.html
+29e148662574ecc0469c7d9922d0f60f *inst/doc/augment_lhs.html
 8fdba625920bb80223d6610cf6431821 *inst/doc/lhs_basics.R
 8ff53a64234bb3915981edd70e797c53 *inst/doc/lhs_basics.Rmd
-16ac9af89cf298685ad8018999144b80 *inst/doc/lhs_basics.html
+013af7b138ff1fa8d34a75a4d22eefdb *inst/doc/lhs_basics.html
 21ae80800268e1193314907b21c47fd5 *inst/doc/lhs_faq.R
 a098b867dd78ec2eb6963c40d7ba98ae *inst/doc/lhs_faq.Rmd
-fca0f847fdf607cc9deb93e9d5c45956 *inst/doc/lhs_faq.html
+247daf21cdd8f8300c4b867d7a2b047f *inst/doc/lhs_faq.html
 385a89b5cd29ef880745c295821f72fa *man/augmentLHS.Rd
 d10b89e1edef0cdb6573410491331111 *man/createAddelKemp.Rd
 d93652e2d6e052941cef8e5570b5c9bf *man/createAddelKemp3.Rd
@@ -57,8 +57,8 @@ f649001939ea771545339996d0bf614f *src/COrthogonalArray.cpp
 66ad54cb00e04bda7bd043c888fb8094 *src/GaloisField.cpp
 92dc5772d370e69822ec1db2035eb6cc *src/GaloisField.h
 37769f1ff1637a4cb937ae9720561c2c *src/LHSCommonDefines.h
-49c81e4b25b6084fd20699d9856daf61 *src/Makevars
-578b757dacc6ac95aa527138585f3b91 *src/Makevars.win
+f638d0697d0c1eb3fe1afedfdd157c15 *src/Makevars
+f3268dbce99fd476879b3695151fbb72 *src/Makevars.win
 b7e05dd7cf58418b0be2c70f8412c233 *src/OACommonDefines.h
 dd1ee7c05925ea002a3177907d472373 *src/RStandardUniform.h
 72cfdd82c1f1edd241169ad8404557f9 *src/ak.h
