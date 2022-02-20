@@ -1,5 +1,5 @@
-eb4d9f871c8c7ba52610b4476bf68305 *ChangeLog
-db642d31bccbc7a07ef13703506aee5d *DESCRIPTION
+bb56f81cdf1cb6488dde6c90b7caf7e6 *ChangeLog
+7835503c5811a3051a49472c11913941 *DESCRIPTION
 4ad42b6ea879a1ef4e8ca522e4ada103 *NAMESPACE
 53866b3921acf88d621f1b67d6bf5517 *R/augmentLHS.R
 851e4e4b32ef0d1ff208e28d2469abfe *R/createOA.R
@@ -19,13 +19,13 @@ b6508e5d04a13558e19c6534c768e2a9 *R/optimumLHS.R
 bd8aa815de477b25d5e28b3b329adaf2 *build/vignette.rds
 c40fe474107a72a524c98cd5d077c125 *inst/doc/augment_lhs.R
 2ea4584a4f8f5710e9e845e365d054ea *inst/doc/augment_lhs.Rmd
-29e148662574ecc0469c7d9922d0f60f *inst/doc/augment_lhs.html
-8fdba625920bb80223d6610cf6431821 *inst/doc/lhs_basics.R
-8ff53a64234bb3915981edd70e797c53 *inst/doc/lhs_basics.Rmd
-013af7b138ff1fa8d34a75a4d22eefdb *inst/doc/lhs_basics.html
+986c150ce06758e4677441f7e9bf8535 *inst/doc/augment_lhs.html
+c3dd307ccf782db9eb75f1404cf37fa1 *inst/doc/lhs_basics.R
+c48d7934b6c01da2179998d83c78ac05 *inst/doc/lhs_basics.Rmd
+56e5c803acf5b2faae75094b90b98075 *inst/doc/lhs_basics.html
 21ae80800268e1193314907b21c47fd5 *inst/doc/lhs_faq.R
 a098b867dd78ec2eb6963c40d7ba98ae *inst/doc/lhs_faq.Rmd
-247daf21cdd8f8300c4b867d7a2b047f *inst/doc/lhs_faq.html
+2dfd62ef8911d015738eea709263340b *inst/doc/lhs_faq.html
 385a89b5cd29ef880745c295821f72fa *man/augmentLHS.Rd
 d10b89e1edef0cdb6573410491331111 *man/createAddelKemp.Rd
 d93652e2d6e052941cef8e5570b5c9bf *man/createAddelKemp3.Rd
@@ -120,5 +120,5 @@ e0518a44b176a6478581f36e770c3435 *tests/testthat/test-optseededlhs.R
 1dfdaa44c78fdaca863983c32b1d804a *tests/testthat/test-randomlhs.r
 8f248fe4625ca971df2ab8b8f503fc6d *vignettes/VignetteCommonCode.R
 2ea4584a4f8f5710e9e845e365d054ea *vignettes/augment_lhs.Rmd
-8ff53a64234bb3915981edd70e797c53 *vignettes/lhs_basics.Rmd
+c48d7934b6c01da2179998d83c78ac05 *vignettes/lhs_basics.Rmd
 a098b867dd78ec2eb6963c40d7ba98ae *vignettes/lhs_faq.Rmd
