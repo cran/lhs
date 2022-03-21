@@ -1,6 +1,6 @@
 Package: lhs
 Title: Latin Hypercube Samples
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: 
     person(given = "Rob",
            family = "Carnell",
@@ -18,8 +18,8 @@ BugReports: https://github.com/bertcarnell/lhs/issues
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2022-02-20 04:38:06 UTC; bertc
+Packaged: 2022-03-21 23:03:37 UTC; bertc
 Author: Rob Carnell [aut, cre]
 Maintainer: Rob Carnell <bertcarnell@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-02-20 05:10:02 UTC
+Date/Publication: 2022-03-22 00:10:06 UTC
