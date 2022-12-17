@@ -12,11 +12,23 @@
 
 <meta name="author" content="Rob Carnell" />
 
-<meta name="date" content="2022-03-21" />
+<meta name="date" content="2022-12-17" />
 
 <title>Latin Hypercube Samples - Questions</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -26,6 +38,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -109,13 +122,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -127,7 +147,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,19 +341,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Latin Hypercube Samples - Questions</h1>
 <h4 class="author">Rob Carnell</h4>
-<h4 class="date">2022-03-21</h4>
+<h4 class="date">2022-12-17</h4>
 
 
 
 <div id="question-1" class="section level2">
 <h2>Question 1</h2>
-<p>I am looking for a package which gives me latin hyper cube samples from a grid of values:</p>
+<p>I am looking for a package which gives me latin hyper cube samples
+from a grid of values:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> (<span class="dv">20</span><span class="sc">:</span><span class="dv">30</span>) </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dataGrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(a, b)</span></code></pre></div>
 <div id="answer" class="section level3">
 <h3>Answer</h3>
-<p>The <code>lhs</code> package returns a uniformly distributed stratified sample from the unit hypercube. The marginal distributions can then be transformed to your distribution of choice. If you wanted a uniform Latin hypercube on [1,10] and [20,30] with 22 samples, you could do:</p>
+<p>The <code>lhs</code> package returns a uniformly distributed
+stratified sample from the unit hypercube. The marginal distributions
+can then be transformed to your distribution of choice. If you wanted a
+uniform Latin hypercube on [1,10] and [20,30] with 22 samples, you could
+do:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(<span class="dv">22</span>, <span class="dv">2</span>) </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>X[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">9</span><span class="sc">*</span>X[,<span class="dv">1</span>] </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span><span class="sc">*</span>X[,<span class="dv">2</span>] </span>
@@ -180,12 +385,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,] 5.133860 28.56320</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,] 3.902311 25.25066</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6,] 9.530130 26.39973</span></span></code></pre></div>
-<p>If you want integers only in the sample, then we must be careful about what we mean by a Latin hypercube sample. If you wanted exactly 3 points, then you could divide up the range [1,10] into three almost equal parts and sample from <code>1:3</code>, <code>4:6</code>, and <code>7:10</code>. The problem is that it wouldn’t be uniform sample across the range. (7 would be sampled less often than 2 for example)</p>
-<p>To do a Latin hypercube sample on the intgers, you should have a number of integers on the margins which have the number of points sampled as a common factor. For example if you sample 3 points from <code>1:9</code>, and <code>21:32</code> then you could sample as follows:</p>
+<p>If you want integers only in the sample, then we must be careful
+about what we mean by a Latin hypercube sample. If you wanted exactly 3
+points, then you could divide up the range [1,10] into three almost
+equal parts and sample from <code>1:3</code>, <code>4:6</code>, and
+<code>7:10</code>. The problem is that it wouldn’t be uniform sample
+across the range. (7 would be sampled less often than 2 for example)</p>
+<p>To do a Latin hypercube sample on the intgers, you should have a
+number of integers on the margins which have the number of points
+sampled as a common factor. For example if you sample 3 points from
+<code>1:9</code>, and <code>21:32</code> then you could sample as
+follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span>), <span class="fu">sample</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">1</span>), <span class="fu">sample</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">1</span>)) </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="dv">21</span><span class="sc">:</span><span class="dv">24</span>,<span class="dv">1</span>), <span class="fu">sample</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">28</span>, <span class="dv">1</span>), <span class="fu">sample</span>(<span class="dv">29</span><span class="sc">:</span><span class="dv">32</span>,<span class="dv">1</span>))</span></code></pre></div>
-<p>and then randomly permute the entries of <code>a</code> and <code>b</code>.</p>
-<p>Or more generally, take <code>n</code> samples from the list of integer groups:</p>
+<p>and then randomly permute the entries of <code>a</code> and
+<code>b</code>.</p>
+<p>Or more generally, take <code>n</code> samples from the list of
+integer groups:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>integerLHS <span class="ot">&lt;-</span> <span class="cf">function</span>(n, intGroups) </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>{ </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(<span class="fu">lapply</span>(intGroups, <span class="cf">function</span>(X) <span class="fu">length</span>(X) <span class="sc">%%</span> n) <span class="sc">==</span> <span class="dv">0</span>)) </span>
@@ -258,32 +474,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
-<p>I am trying to do a Latin Hypercube Sampling (LHS) to a 5-parameter design matrix. I want the combination of the first three parameters to sum up to 1 (which obviously do not)</p>
-<p>If I divide each of these parameters with the sum, the uniform distribution is lost. Is there a way to maintain the random LHS (with uniformly distributed parameters) so that the refered condition is fulfilled?</p>
+<p>I am trying to do a Latin Hypercube Sampling (LHS) to a 5-parameter
+design matrix. I want the combination of the first three parameters to
+sum up to 1 (which obviously do not)</p>
+<p>If I divide each of these parameters with the sum, the uniform
+distribution is lost. Is there a way to maintain the random LHS (with
+uniformly distributed parameters) so that the refered condition is
+fulfilled?</p>
 <div id="answer-1" class="section level3">
 <h3>Answer</h3>
-<p>In my experience with Latin hypercube samples, most people draw the sample on a uniform hypercube and then transform the uniform cube to have new distributions on the margins. The transformed distributions are not necessarily uniform. It is possible to draw a Latin hypercube with correlated margins and I hope to add that to my package in the future. I have also done transforms such that the transformed marginal distributions are correlated (as you have in your example). I have not seen a correlated set of uniform marginal distributions such that the margins sum to one, however. I’ll make a quick example argument that explains the difficulty…</p>
-<p>In two dimensions, you could draw this which is uniform and correlated.</p>
+<p>In my experience with Latin hypercube samples, most people draw the
+sample on a uniform hypercube and then transform the uniform cube to
+have new distributions on the margins. The transformed distributions are
+not necessarily uniform. It is possible to draw a Latin hypercube with
+correlated margins and I hope to add that to my package in the future. I
+have also done transforms such that the transformed marginal
+distributions are correlated (as you have in your example). I have not
+seen a correlated set of uniform marginal distributions such that the
+margins sum to one, however. I’ll make a quick example argument that
+explains the difficulty…</p>
+<p>In two dimensions, you could draw this which is uniform and
+correlated.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="at">length =</span> <span class="dv">10</span>) </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> x </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(x <span class="sc">+</span> y, <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x))) </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
-<p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>But in three dimensions, it is hard to maintain uniformity because large samples on the first uniform margin overweight the small samples on the other margins.</p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>But in three dimensions, it is hard to maintain uniformity because
+large samples on the first uniform margin overweight the small samples
+on the other margins.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="at">length =</span> <span class="dv">10</span>) </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">length</span>(x), <span class="dv">0</span>, <span class="dv">1</span> <span class="sc">-</span> x) </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> x <span class="sc">-</span> y </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAUVBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6kNtmAABmADpmZmZmtv+QOgCQZgCQ2/+2ZgC2/7a2///T09PbkDrb/9vb////tmb/25D//7b//9v///9t1fz0AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAFo0lEQVR4nO3d4XabNgBAYadOt3T14m0sbuz3f9CBgZziGi5CyrEm3fsrPi5O+h2MAQm8u9hiu0f/AbknECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkEBQGdD7srn35+5P+nPwKAmp2v/c/nMYfyi8E6Hz4YGn2b5/wx+RYCND7y/fxx1M1bzLXIChwGzSsQm6DZnp/6T/Fqll/3A/CBII2AjV+ioW9ykc3D3PsEUA3L7f7Zzl4Pu5pXFwgePozgZp2Db3uCs1tgyoHap5e212hZ4Fm6g81zod2N1Gge40Hq8f9m0D3+jhYPT4LdLeRpT0kE+i+0HA4fz4ItC2BBBJIIIGWn94I1H50Pwu0ANQficaeiy8aKIVR6UA9UcTp1MKBTtfTPdfDdYF+AerGvHqZiHHlgoHeX55et7JUAZSmooGO7RssdtC9ZKDjdQPUn3IW6Feg8Xxq3MyfgoHG86mbBpVvhi2LBBrOFv746p70DFBr064BkZ/1RQOlSKCKgZJMEi8Z6JhiTlTBQO8vKSauFg30fenfCXQ+JDglXTJQe5yaYBUqGGicI+6n2AxQmgSqGah9k+3fjp4wmwM6Pb02+7fI3aGCgbrzQc3C9MzhH8GGvGCgbkexA1o6o8jXrBYMNK5Bx/lRwxVXHBYMNGyDmoXdxRXXrJYM1O8qLp1RrHwNWhFfs1o5EF+zWjCQx2IANBR5x4DygS7HVaeFKr5WY9MqVMXI6lDc9czlAzm7Yw4ozV0nCgZKU91AH7tK83tLBQOt+N/PX0dXA9Aw7LN0NL9i8KxgoPOhl1m+txQNnhUM9P6tP9HhHMUZoHENWjijWDdQd0bx0t99QqC7QP3nWOTdyYoGSpFANQM59LwM5NDzMtCqoeeagdYMPVcNtGLouW6gFUPPlQPx0HPtQCkqGOinmQkC3QNypj0ApblNfcFAUZMXahpZjUugSoHSbKFLB0rxQS+QQAIJJNDy0wLB09uAeGpH1UDJEkgggQT6RKCaL8lcU9WXZK7IC+qg2i/JxFyDKC/JpGq+JDNNAgm0roovydzU7cBh1j0CqOAEghIfrJZX4oPV8kp8qDG8aNZ9HtCKg9V1LwrPxz0du3jEP1+/BsX90v8t0IqD1XUvWizQ2rsP1AuU6EUFinteIIHinheoeqCSEggSCBIIEggSCBIIEggSCBIIEggSCBIISgl0+vnGDafguzjcLhF4F5HJ4s1ul+LbwC5Jgbq7xJ3Gv3HyIHzx7nHY/dQmi3e3qkvyfWkpgfpBoeGG5pMH4Ytfhvthbf7tz4G/fb50QD++Xm912o8oTh6EL979tP8zBGiyeKZAv3Xr9zDkOnkQvvj1YdA2aLp4lm+xfgMwbAYmD8IXv75jgoBufmH4R8RcmQIF3wtrunj3pbqR33s+ludb7Ppg+1ssfAs4X54b6WaYqbJ+KzJZPHz9nS/bj/nANWiyeK+V5H4/Ge8oBu5JTxbPcht0fWN0f2G/F9IEf45MFr8EH2pMFj+27880swQ9WIUEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCBIIEggSCcgfq5oxFfjluXLkDjd9u+rByB7qcvvz1Lc2E3m1lD3Q57pLMmN9a/kCJZsxvLXug8+GPh961MXugZv9vkm+A3VruQN2tCdNMeN5Y7kDdXOCPicGPKHeghycQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBAkECQQJBD0HwFXP3b/x/qIAAAAAElFTkSuQmCC" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(z, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAATlBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6kNtmAABmADpmtv+QOgCQZgCQ2/+2ZgC2/7a2///T09PbkDrb////tmb/25D//7b//9v///93rkYzAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGUUlEQVR4nO2d4XrbJhRA3S7L6tWrtylK7Pd/0UmWnRobdJQITxSd86tObq/F+RAgIGhzlFE2S19A6SgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQE5BG0eefmI5Dlyx9L5ms8C/p3GgpSUDydgiCdgiCdgiCdgiCdgiCdgiCdgiCdgiCdgiCdgiCdgiBdlYLetpvfc6WrUtDx2Gw2m29Z0lUq6JjBUe2CBkVf/xn/P6/P38fTVSuo7ex8Px52Ty/R2K6ZeichsWZBffEHM22qCrXD/bfOGvS2/fIDo9+2vcJ7QbeT9jUKmsi+07jOGtSVvasdLXZizebbSgXtTw3Q25aGi6/Pv61S0Nt2KHWyhX7nsNusUdBhN9xcDQridFUK6hqXvl68PjuSDri6xtfnrpue0NdzukoF5UunIEhXp6Cucxp7yvpIujoF7WeZCdJVKehtO3ey7Ge6SgUlR38fTleloMMuw5R0zYK659QMVahiQe/ThfZiAY6DAAUBV9fY3WRPL/t5nX3NgtovP5qnl5nDoYoF9fNBnaDPzQc9dtJ+0X37wUCxF8Qzipwut6Al6+NdDdonVg0/kq5KQec2qJk3XKxZ0DBULHFGsRRB+dIpCNJVKajgZ7EyBJ2Z18uvQNBxP2taaAWCHCjGSnRFgUvPRQni3R0T0lUp6NKLzXrSqFlQznQKgnRVCpqwx3dyuioFnZd9xp/mm9NG6mO6r6tY0GE3mGlGWumme9YfurkVCnr7c5joGBkoDrv0ThvxVyjoUoNGZhQvy/ddyI2gB89JFyGon1E8DndRiss+z+55bYU16NyPjY4TL1q6yDUKmsCljzvsFDQnXaWCil16LkRQuUvPZQiatfR8k65KQS49j5Xo6NLzeIl6XHoeKdEJl57TJcqcrkpB7w9aGdJVKajgnfZlCJq76HydrkpBbl4YK1HmdAqCdPUJytNCHysXlKOjV1Aiyycn7SeSN9sSgm7STRa0SJiCIExBEKYgCPucoBxbOyoWlA0FKUhBClLQeJiCIExBEKYgCFMQhCkIwhQEYY8UhAfBrVxQczkrOHlo8LoFXc2HpPbjr1vQ1dpHO76RvGgeJ2hCDaqPD7ZB5yrEB5dXw8cqXJ6/2/yleMxqW0U8RNCyjTBRgqC8cYuEfTI8b1IF5YlTUIlhnwzPm1RBeeIUVGLYJ8PzJlVQnrj6BNWEggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBOQU1F4f3NCmT3G4/tVpQ018mfY2Q+JUkSCsfxVq/LTeIOz9PEgmo6D+lLj2chHBh3TcYdf9o4mW6TZDG1/PDb+1C4mfZxyE9SfZTX2dWj5Bw9aG84HmwYeRuOHF47Ezi24znM7HmvStmG14Gd/Eo9fzCQrKmi547FexqnYb1jz9FRMUfusfqaNZgrClBJ2urr2+1OhhDpFfxd5gehPWfYy2QUFY+/XvbbxFC7Mtc4sN1eBcGYIPI3HDT2JlCsP6WyQqKAhr+s2T0bdZ3nzpSA9ySwGC2mQb/TMseTZWKOhLqt6G2foaO/W16MvfYonNWPfp+BYb2pihvRnLlm4g71m8kW4So6AgrDnvXImU/DpsEBBrqsOwdPW+Z+FuPn3A932GaA0KwoZdprF6GxlbTDwOaOGB4khLcJchPpIOR4BdSPyPt4OwZdqg043QX8LQjTTpjuIq7nzvRCODdMfko0YQ1iYfXIKwfTLsDh9WAQUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBBQuqBhf8yCJ6aVLqhn3rtxZ/ILCIptyvz/KF/QYbfomXvlC2pmvvp1JsULmrrZ8lGULmjhG6x8QQvfYMULupzwvVw/Vrig5VEQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAT8B7iBKqcBA3MFAAAAAElFTkSuQmCC" /><!-- --></p>
-<p>The commmon practice in your situation is draw the <code>K</code> parameters together as a uniform Latin hypercube on <code>0-1</code> and then transform the margins of the hypercube to the desired distributions.</p>
-<p>Easy Example * Parameter 1: normal(1, 2) * Parameter 2: normal(3, 4) * Parameter 3: uniform(5, 10)</p>
+<p>The commmon practice in your situation is draw the <code>K</code>
+parameters together as a uniform Latin hypercube on <code>0-1</code> and
+then transform the margins of the hypercube to the desired
+distributions.</p>
+<p>Easy Example * Parameter 1: normal(1, 2) * Parameter 2: normal(3, 4)
+* Parameter 3: uniform(5, 10)</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(N, <span class="dv">3</span>) </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x </span>
@@ -298,8 +535,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dummy <span class="ot">&lt;-</span> <span class="fu">apply</span>(y, <span class="dv">2</span>, hist, <span class="at">main =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAHgCAMAAABKCk6nAAAAjVBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6AGY6OgA6Ojo6OpA6ZmY6ZrY6kLY6kNtmAABmADpmAGZmkJBmkNtmtv+QOgCQOjqQOmaQkDqQkGaQtpCQ29uQ2/+2ZgC2Zjq2kDq2/7a2/9u2///T09PbkDrbkGbbtrbb25Db/7bb////tmb/25D//7b//9v///96V1LeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAO3UlEQVR4nO2diXrbNhZG5Xhr045kt3ZXK5Nx1MXa3v/xhotsWRYAgSRAXv465/vSKCUF8eKQWEgAnGxBmsnQBwB5QbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CI5l8srQB9IMC4c7OWboQwrQ+dj6DdNCVk6+7dh/GPqQAnQX/K3PMC1kJYIzYiErEZwRC1mJ4IxYyEoEZ8RCViI4IxayEsEZsZCVCM6IhaxEcEYif2Ne33mZ5jmGcxD87v7VXnAPN7XiEp5fvtR/X2U5hrMQ/O0oynef8kUclfD67qn+sLp9znEM9gQHSiwENz8Gc4JDJZai4LdAXwNPfAzWBAdP6JEKXs+C1etCrZEVjFdR8Ha7nEwunnL9TPgYBrmCQ/GGSqzRCi7YPE4mD46dqjN6KXUFV/jiDZZYoxW8uq6idZ20peBleVIvplmOYRDBgXiDjFTwerYL1FXtFII3jw8fNnbuoh/3/Pcfso9pORWvv8QaqeAgTsGNUnD+9LHXjx8Gak0HSyxJwbNPz4sq4HT9QuOCk5dYgwte3TxtF5989zHWs7LJ6ayvRio4FG+OEmtowXVAixY3MsYpOBhvjhJraMF1377NrchxCj4Rb/oSa2jBdd++za3IcQruPd7BBZed/okn3uJ83uGotEYqOBRvkLEKDhN4EDxSwa3RFLx5nHZMwfFFs4JzlFiDC176AopOofEXBxUcjjd9iTW04PXMfdc9PoXmXxxS8Il405dYgwu+a/uocKSC+453aMHOPn2zFBp/cUjBvcc7tOBdu+Js6uDe4x1a8AAp2G1FB2l0TM7R0E7BuUZII7gpzQQHtb4XnOtafn8n6/KfNqNiRyq4n3jtCC76BcvLl3N6mtRLvHYEF92GIuCzeprUR7x2BNdn9Pk8TeopXjuCe3+6YqAO7iFeQ4Kbf7PzqMpBBbfmbAR3TgHBvTayuJN16nDblFh2BNfMWzxSGqfgmuzxWhPcSzcpMKHhSHDmKQ5n1E2qWfZRRE8+xhQQnCnqV7LHa0fwrk7qo4g2IbineO0I7jEFE4Lbg+CTX0DwAIKDAwmjUoj/ggXBPcVrR3A9hKXNOljjFNxTvHYE9zg3yYTgnuK1I3jzeF5XcE/x2hFcP11pM9JwnIJ7iteQ4P5SsCG4NQg++QUEDyG4v0F3NgQz6O6AlKuvmhCcddBd7Ghot+C0T1jiBt0lXX3VhOATg+66ndCxWt2C95+6BPjxcIOD0NIuzmlCcHjQXccT2qLg8BIOeoKzxmtScJCkq6/aEBxCUfCJ+bIpV181ITgcb8cT2qLg5sOTWrf1TAg+EW+3E9qi4OAow7Srr5oQnHVUpUXBQdKuvtpKcObRd4d0PaHHKLj74pxHnf9GgpMGfYquJ7Q5wadWJEkjOMJeT4Jzx2tT8Hzq3SnJ6qvWBIfiPTfBSVZfHZPgjif0CAWfSiFmv/EI7npCI9i84FAcEbuYE9x6DOl2nIIzx2tOcC8pGBLciR4Fp+j9I7gp3iNo/pj/lOD9pwyHmzwFfcGNtSIYwQjuHQT79kOwpODjlkc3wX0+VXIH5N1wpoKb2IvfBcFdDzdVCuqCu3SO4gW37xEjuCkfBXfQGi94/6nj4XYP+GhzC3sI9n/qeLg+Go/097etEgnO29o6FW+agrmN4KaBR46LPjXS/+hnO9mLEXwccVzAieJtbib4qc2X40KJHnRX4X0j9sQAcQGfW7ztBQujFG9kER0Y6a+IULyRF3pgpL8n3WELpq6cijdbeHE0iCRXhuU6huHvRVf4b2el29DmK932bQKCO29A8IAgGMGdNyB4QBCM4M4bEDwgCEZw5w22BYMRECwOgsVBsDgIFgfB4iBYHASLg2BxECwOgsXJJHh17V1t+wObx/iVUOJTzUs12LLJgXv39Ubk/YlqQ4OMyCR4Gf3KqflV/PvH4lPNSrlOWrMD9+7ri8j7E/WGBhmRSXD0IlTlEOTo0cdtl7ZKy2LyQ3HATQ7cv68nIu9P1BuaZEQewZtfwqt97lntAkmbalb+rl7W0uTAvfv6IvL+RL2hSUbkEby++65cCjCCJvkUn2pmkgn2R+T9ifp/xmdEHsGrm6ft+j6m/GqUT9GpZiaZYH9EQcFNMiK94MXupZ5x0TfJp/hUc7GLLZngEveGoGD/147J1w+OO4JGjazoVDOzcreAvAT39Qt2fs2G4GXRll99juqoNehtNEg1L1Ump+gm+SPy/kS5oUlGZLqCF9ELua5n8fcL4lPNS5X7TQ7cu683Iu9PVBsaZAS3KsVBsDgIFgfB4iBYHASLg2BxECwOgsVBsDgIFgfB4iBYHASLg2BxECwOgsVBsDgIFgfB4iBYHASLY0PwopzsOr9az/ZvSVjdPi9sDJLNQI/x2hC8eXwoR3J/HK0v8FYbNz3Ga0Pwdnn5Mn84mo4hK7jHeHsWvLr9rXpZTTVmvzqPrx/KaLfznz6/HAT8Ovtq3Awfb9+Cr6flzJoy1KIeWlxtl99Pt4tpPZFSUfDg8fYt+KaaMLebO1dUQ1/++LGMfruoznM9wYPH23sRXYVRrhIzuXha3/3569f7r/dF9PV/9QQPHu9AgneRlDXRl9+vtmWpVZRfuoKHi3cYwVVzo5zoWtZIxZ9dESYreMB4hxFctirLVUSqNuXF0+Zxui17//+WAe+WCJISPGC8RvrBNdUZvfr57d/jFxymj3jtCf7rsNhSpo94bQmeHbyxV/de9I4+4jUlGNKDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOO0FT145+MeAJMsTKbpnSy342zs6/6NdCp0jkQTB4iBYHASLg2BxECwOgsVBsDgIFgfB4iBYnMhsmde3e6e+FBBslbhsmV++1H9feVJAsFWismV991R/WN0+u1NAsFVes2U9c1ycryB4vOyzZTmZXDx59notml+L6qMUEGyVg2zZPE4mD87dFjSyRso+W1bXlV3XRer+5vuRFAi2yr4O3ol1VbPF1smn/xWXt6ueRrBpIrtJD0UVXVzeC7pJYyO6m1S1pGlFj463bFndPG0XnxzF83Yn+P4ZwSPkNVs2j2XzeeFpYVFEj5a3RlZ1L8PZwtrSyBoxb9lS3cuI7iN9TAHBVnnLlvImx6SFXwTbhufB4iBYnLdsWVa3HT39pJMpINgq+1uV7qcMkSkg2CqH3aTWKSDYKm/Z4rqHEZ8Cgq2yL6KpgyWhFS1OqiUcEGyU93eyLv/x3Io+nQKCrbJ/mjRdXr74niadTAHBVnnXTSoE+54mnUwBwVY5vIJ5miQHT5PEoZskDoLF4U6WOIfZMm/xSAnBpjnMFrpJchxmy9JXRDPDf6x8qIM9RTQz/EcLM/zFQbA4H4poT0+JGf6j5XDIjquOrbfSyBopcXOTnN/kgf8Y2D9NCl7BFe6nxQg2zeHTJI/fYAWNYNPEZcvqerrlCh4lsdlSTv5H8AiJHnS3nl0heIQ0GHS3dA/4QLBpGHQnDoPuxGHQnTiMyRKH+cHi7JdRYoa/JIyqFIc6WBwEi1NlS/sW1hbBxtkLnk8bfpMH/mOgveCDFBBsFQSLg2BxasHBMbMxKSDYKnSTxEGwOAgWB8HiIFgcBIuDYHEQLA6CxUGwOAgWJzJbWEZprMRlC8sojZb2q+wcjugwQIbcEaD7MkpgmsgiOrCMEpgmsmALLKNUJ2OARDkiRqJs8SfTZkvq5M4ZBIuDYHEQLA6CxUGwOAgWB8HikC3iIFgcBIuDYHEQLA6CxUGwOAgWB8HiIFgcBIuTQvDq2reUeLnK+NS1YVmNonJuKpO7cK+8V2xx/0412rP4sRZryKiTQvDS+760+eXL6sa3TKLnbdTr2UP1Eh/Xlmn9isXjDeX+86sTb247S1II9q6wFVwDsxTporwa3V/0bVlMfthtYdz2EQkEb37xaQzmt+8VPpvHh+3Suc0n+O/qbTH+E+OsSSB4ffedp9JcXv7X+9b40qNvi6emrQpvZ3oI9pJAcFnLru9d1+qyaEYtfQ0m39Vd1bTu6rloZP3HeV4g2EuibpI7Z8uS1nelOltLJWFR/toZwU6yCi7z3CfY2zILi3Jf+CsaWT4SCC67O6vPzlqzsOjpDIWqYF8RXSp0d4QqsXSTXKS4ghfeVWrLGx1ukYHC1H+jY+m7oVIJXs+40XEMtyrFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi4NgcRAsDoLFQbA4CBYHweIgWBwEi2NDcDURbX61nu2nDK9unxcMg+2ODcHlMPjV55ePg6WZqNAdG4LLWUzzh6PR8AjuTs+CV7e/VSs3VLMQquv2up4NPP/p88uB4Nf5ZNCNvgVfV7OVSrVFvbu42i6/n24X03oOKoIz0Lfgm2oK4G42YFHtfvnjx2oe2qK6rhGcnN6L6EpbuS7P5OJpfffnr1/vv94Xtuv/Ijg5AwnemStr3i+/X23LUroorxGcnmEEV82r4mNVAxd/dkU2gtMzjOCyFV3OAa7a0BdP5Zzv8m7Hv6Xg3dR/BKfBSD+4prqCVz+//RvB3bEn+K/DYhq6YUvw7GD5Su5FJ8CUYEgPgsVBsDgIFgfB4iBYHASLg2BxECwOgsVBsDgIFgfB4iBYHASLg2BxECzO/wGpwBp+adZJ4QAAAABJRU5ErkJggg==" /><!-- --></p>
-<p>The transformed distributions maintain their “Latin” properties, but are in the form of new distributions.</p>
-<p>In your case, you’d like the first three columns to be transformed into a correlated set that sums to one. Still follow the pattern…</p>
+<p>The transformed distributions maintain their “Latin” properties, but
+are in the form of new distributions.</p>
+<p>In your case, you’d like the first three columns to be transformed
+into a correlated set that sums to one. Still follow the pattern…</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(N, <span class="dv">5</span>) </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>y[,<span class="dv">1</span>] <span class="ot">&lt;-</span> x[,<span class="dv">1</span>]<span class="sc">/</span><span class="fu">rowSums</span>(x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) </span>
@@ -324,7 +563,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(y, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>But, the “Latin” properties of the first three margins are maintained as in this smaller example…</p>
+<p>But, the “Latin” properties of the first three margins are maintained
+as in this smaller example…</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(N, <span class="dv">5</span>) </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x </span>
@@ -342,11 +582,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>
-<p>How do I create a Latin hypercube that ranges between between 0 and 1 and sums to 1?</p>
+<p>How do I create a Latin hypercube that ranges between between 0 and 1
+and sums to 1?</p>
 <div id="answer-2" class="section level3">
 <h3>Answer</h3>
-<p>I have an imperfect solution to this problem using a Dirichlet distribution.<br />
-The Dirichlet seems to keep the range of the values larger once they are normalized. The result is not uniformly distributed on (0,1) anymore, but instead is Dirichlet distributed with the parameters alpha. The Latin properties are maintained.</p>
+<p>I have an imperfect solution to this problem using a Dirichlet
+distribution.<br />
+The Dirichlet seems to keep the range of the values larger once they are
+normalized. The result is not uniformly distributed on (0,1) anymore,
+but instead is Dirichlet distributed with the parameters alpha. The
+Latin properties are maintained.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>qdirichlet <span class="ot">&lt;-</span> <span class="cf">function</span>(X, alpha) </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>{ </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># qdirichlet is not an exact quantile function since the quantile of a </span></span>
@@ -390,7 +635,8 @@ The Dirichlet seems to keep the range of the values larger once they are normali
 </div>
 <div id="question-5" class="section level2">
 <h2>Question 5</h2>
-<p>I need to use Latin hypercube sampling for my own custome functions.</p>
+<p>I need to use Latin hypercube sampling for my own custome
+functions.</p>
 <div id="answer-3" class="section level3">
 <h3>Answer</h3>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(lhs) </span>
@@ -429,7 +675,8 @@ The Dirichlet seems to keep the range of the values larger once they are normali
 </div>
 <div id="question-6" class="section level2">
 <h2>Question 6</h2>
-<p>I need a Latin hypercube sample on an integer set or a set of colors.</p>
+<p>I need a Latin hypercube sample on an integer set or a set of
+colors.</p>
 <div id="answer-4" class="section level3">
 <h3>Answer</h3>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span> </span>
