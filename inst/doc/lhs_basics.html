@@ -12,7 +12,7 @@
 
 <meta name="author" content="Rob Carnell" />
 
-<meta name="date" content="2022-12-17" />
+<meta name="date" content="2024-06-30" />
 
 <title>Basic Latin hypercube samples and designs with package lhs</title>
 
@@ -31,27 +31,27 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -65,55 +65,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -342,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">Basic Latin hypercube samples and designs
 with package lhs</h1>
 <h4 class="author">Rob Carnell</h4>
-<h4 class="date">2022-12-17</h4>
+<h4 class="date">2024-06-30</h4>
 
 
 
@@ -361,17 +360,17 @@ many of the articles that followed on optimized sampling methods.</p>
 <div id="create-a-simple-lhs" class="section level3">
 <h3>Create a Simple LHS</h3>
 <p>Basic LHS’s are created using <code>randomLHS</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed for reproducibility</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1111</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a design with 5 samples from 4 parameters</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(<span class="dv">5</span>, <span class="dv">4</span>) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>A</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           [,1]       [,2]      [,3]      [,4]</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 0.6328827 0.48424369 0.1678234 0.1974741</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] 0.2124960 0.88111537 0.6069217 0.4771109</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] 0.1277885 0.64327868 0.3612360 0.9862456</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,] 0.8935830 0.27182878 0.4335808 0.6052341</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,] 0.5089423 0.02269382 0.8796676 0.2036678</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># set the seed for reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1111</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># a design with 5 samples from 4 parameters</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(<span class="dv">5</span>, <span class="dv">4</span>) </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>A</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt;           [,1]       [,2]      [,3]      [,4]</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; [1,] 0.6328827 0.48424369 0.1678234 0.1974741</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; [2,] 0.2124960 0.88111537 0.6069217 0.4771109</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; [3,] 0.1277885 0.64327868 0.3612360 0.9862456</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt; [4,] 0.8935830 0.27182878 0.4335808 0.6052341</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#&gt; [5,] 0.5089423 0.02269382 0.8796676 0.2036678</span></span></code></pre></div>
 <p>In general, the LHS is uniform on the margins until transformed
 (<a href="#X">Figure 1</a>):</p>
 <div id="X" style="text-align:center;text-size:11pt;font-weight:bold">
@@ -380,18 +379,18 @@ Figure 1. Two dimensions of a Uniform random LHS with 5 samples
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
 <p>It is common to transform the margins of the design (the columns)
 into other distributions (<a href="#Y">Figure 2</a>)</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">nrow</span>(A), <span class="at">ncol =</span> <span class="fu">ncol</span>(A))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(A[,<span class="dv">1</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">qlnorm</span>(A[,<span class="dv">2</span>], <span class="at">meanlog =</span> <span class="fl">0.5</span>, <span class="at">sdlog =</span> <span class="dv">1</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">3</span>] <span class="ot">&lt;-</span> A[,<span class="dv">3</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">qunif</span>(A[,<span class="dv">4</span>], <span class="at">min =</span> <span class="dv">7</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>B</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             [,1]      [,2]      [,3]     [,4]</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]  0.33949794 1.5848575 0.1678234 7.592422</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] -0.79779049 5.3686737 0.6069217 8.431333</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] -1.13690757 2.3803237 0.3612360 9.958737</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,]  1.24581019 0.8982639 0.4335808 8.815702</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,]  0.02241694 0.2228973 0.8796676 7.611003</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">nrow</span>(A), <span class="at">ncol =</span> <span class="fu">ncol</span>(A))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>B[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(A[,<span class="dv">1</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>B[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">qlnorm</span>(A[,<span class="dv">2</span>], <span class="at">meanlog =</span> <span class="fl">0.5</span>, <span class="at">sdlog =</span> <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>B[,<span class="dv">3</span>] <span class="ot">&lt;-</span> A[,<span class="dv">3</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>B[,<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">qunif</span>(A[,<span class="dv">4</span>], <span class="at">min =</span> <span class="dv">7</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>B</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;             [,1]      [,2]      [,3]     [,4]</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; [1,]  0.33949794 1.5848575 0.1678234 7.592422</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; [2,] -0.79779049 5.3686737 0.6069217 8.431333</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; [3,] -1.13690757 2.3803237 0.3612360 9.958737</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; [4,]  1.24581019 0.8982639 0.4335808 8.815702</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; [5,]  0.02241694 0.2228973 0.8796676 7.611003</span></span></code></pre></div>
 <div id="Y" style="text-align:center;text-size:11pt;font-weight:bold">
 Figure 2. Two dimensions of a transformed random LHS with 5 samples
 </div>
@@ -405,13 +404,13 @@ design by ensuring that the selected points are as uncorrelated and
 space filling as possible. <a href="#tab1">Table 1</a> shows some
 results. <a href="#Z">Figure 3</a>, <a href="#W">Figure 4</a>, and
 <a href="#G">Figure 5</a> show corresponding plots.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>A1 <span class="ot">&lt;-</span> <span class="fu">optimumLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">maxSweeps =</span> <span class="dv">4</span>, <span class="at">eps =</span> <span class="fl">0.01</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>A2 <span class="ot">&lt;-</span> <span class="fu">maximinLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">dup =</span> <span class="dv">5</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>A3 <span class="ot">&lt;-</span> <span class="fu">improvedLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">dup =</span> <span class="dv">5</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>A4 <span class="ot">&lt;-</span> <span class="fu">geneticLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">pop =</span> <span class="dv">1000</span>, <span class="at">gen =</span> <span class="dv">8</span>, <span class="at">pMut =</span> <span class="fl">0.1</span>, <span class="at">criterium =</span> <span class="st">&quot;S&quot;</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>A5 <span class="ot">&lt;-</span> <span class="fu">geneticLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">pop =</span> <span class="dv">1000</span>, <span class="at">gen =</span> <span class="dv">8</span>, <span class="at">pMut =</span> <span class="fl">0.1</span>, <span class="at">criterium =</span> <span class="st">&quot;Maximin&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">randomLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>A1 <span class="ot">&lt;-</span> <span class="fu">optimumLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">maxSweeps =</span> <span class="dv">4</span>, <span class="at">eps =</span> <span class="fl">0.01</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>A2 <span class="ot">&lt;-</span> <span class="fu">maximinLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">dup =</span> <span class="dv">5</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>A3 <span class="ot">&lt;-</span> <span class="fu">improvedLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">dup =</span> <span class="dv">5</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>A4 <span class="ot">&lt;-</span> <span class="fu">geneticLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">pop =</span> <span class="dv">1000</span>, <span class="at">gen =</span> <span class="dv">8</span>, <span class="at">pMut =</span> <span class="fl">0.1</span>, <span class="at">criterium =</span> <span class="st">&quot;S&quot;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>A5 <span class="ot">&lt;-</span> <span class="fu">geneticLHS</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="at">pop =</span> <span class="dv">1000</span>, <span class="at">gen =</span> <span class="dv">8</span>, <span class="at">pMut =</span> <span class="fl">0.1</span>, <span class="at">criterium =</span> <span class="st">&quot;Maximin&quot;</span>)</span></code></pre></div>
 <table style="width:8%;">
 <colgroup>
 <col width="8%" />
