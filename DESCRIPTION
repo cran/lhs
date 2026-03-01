@@ -1,6 +1,6 @@
 Package: lhs
 Title: Latin Hypercube Samples
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: 
     person(given = "Rob",
            family = "Carnell",
@@ -15,11 +15,11 @@ Imports: Rcpp
 Suggests: testthat, DoE.base, knitr, rmarkdown
 URL: https://github.com/bertcarnell/lhs
 BugReports: https://github.com/bertcarnell/lhs/issues
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2024-06-30 21:59:33 UTC; bertc
+Packaged: 2026-03-01 13:10:09 UTC; bertc
 Author: Rob Carnell [aut, cre]
 Maintainer: Rob Carnell <bertcarnell@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-06-30 23:10:02 UTC
+Date/Publication: 2026-03-01 14:40:02 UTC
